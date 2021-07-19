@@ -1,4 +1,4 @@
-scalar Date
+
 scalar URL
 
 type Comment {
@@ -12,8 +12,13 @@ type Painting {
   name: String!
   picture: URL
   lastComment: Comment
+  comments: [Comment!]!
+  
 }
 
 type Query {
   paintings: [Painting!]!
+  painting(paintingId: ID!): Painting
+
+ 
 }

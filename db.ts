@@ -4,7 +4,7 @@ export const comments = [
   {
     id: '1',
     content: 'You on your way?',
-    
+     
   },
   {
     id: '2',
@@ -12,20 +12,21 @@ export const comments = [
     
   },
   
+  
 ];
 
 export const paintings = [
   {
     id: '1',
     name: 'Flower1',
-    picture: '/imgs/1.jpg',
-    lastComment: comments.find((m) => m.id === '1'),
+    picture: 'url(/public/imgs/1.jpg)',
+    comments:['1'],
   },
   {
     id: '2',
     name: 'Flower2',
-    picture: '/imgs/2.jpg',
-    lastComment: comments.find((m) => m.id === '2'),
+    picture: 'https://randomuser.me/api/portraits/thumb/men/1.jpg',
+    comments:['2'],
   },
   
 ];
