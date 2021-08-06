@@ -1,4 +1,4 @@
-import { DateTimeResolver, URLResolver } from 'graphql-scalars';
+import { URLResolver } from 'graphql-scalars';
 import { paintings,comments } from '../db';
 
 const resolvers = {
@@ -26,9 +26,32 @@ const resolvers = {
       },
       painting(root: any, { paintingId }: any) {
         return paintings.find(c => c.id === paintingId);
+      },     
+    },
+    Mutation: {
+      addComment(root: any, { paintingId, content }: any) {
+        const paintingIndex = paintings.findIndex(c => c.id === paintingId);
+  
+        if (paintingIndex === -1) return null;
+  
+        const painting = paintings[paintingIndex];
+  
+        const commentIds = comments.map(currentComment => Number(currentComment.id));
+        const commentId = String(Math.max(...commentIds) + 1);
+        const comment = {
+          id: commentId,
+          
+          content,
+        };
+  
+        comments.push(comment);
+        painting.comments.push(commentId);
+        // The chat will appear at the top of the ChatsList component
+        paintings.splice(paintingIndex, 1);
+        paintings.unshift(painting);
+  
+        return comment;
       },
-      
-
     },
 };
 
